@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/smash-or-pass-pokemon/static/css/main.fc89e77d.css",
-    "main.js": "/smash-or-pass-pokemon/static/js/main.2ddcd725.js",
+    "main.js": "/smash-or-pass-pokemon/static/js/main.43a6ffff.js",
     "static/js/787.8fc77de4.chunk.js": "/smash-or-pass-pokemon/static/js/787.8fc77de4.chunk.js",
     "index.html": "/smash-or-pass-pokemon/index.html",
     "main.fc89e77d.css.map": "/smash-or-pass-pokemon/static/css/main.fc89e77d.css.map",
-    "main.2ddcd725.js.map": "/smash-or-pass-pokemon/static/js/main.2ddcd725.js.map",
+    "main.43a6ffff.js.map": "/smash-or-pass-pokemon/static/js/main.43a6ffff.js.map",
     "787.8fc77de4.chunk.js.map": "/smash-or-pass-pokemon/static/js/787.8fc77de4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.fc89e77d.css",
-    "static/js/main.2ddcd725.js"
+    "static/js/main.43a6ffff.js"
   ]
 }
