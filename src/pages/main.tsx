@@ -1,19 +1,23 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import PokeAPI, { SinglePokemon } from '../services/pokeapi';
 import '../index.css';
 import PokemonDisplay from '../components/pokemon-display';
 import CustomButton from '../components/custom-button';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 const NUMBER_OF_POKEMON = 898;
 const NAN_OF_POKEMON = NUMBER_OF_POKEMON + 1;
 
 export default function Main() {
-  const [currentNumber, setCurrentNumber] = useState(1);
   const [pokemonData, setPokemonData] = useState<SinglePokemon>(
     {} as SinglePokemon
   );
-  const smashList = useRef<SinglePokemon[]>([]);
-  const passList = useRef<SinglePokemon[]>([]);
+  const [smashList, setSmashList] = useLocalStorage<SinglePokemon[]>(
+    'smash',
+    []
+  );
+  const [passList, setPassList] = useLocalStorage<SinglePokemon[]>('pass', []);
+  const [currentNumber, setCurrentNumber] = useLocalStorage('currentNumber', 1);
 
   useEffect(() => {
     PokeAPI.getOne(currentNumber)
@@ -24,14 +28,14 @@ export default function Main() {
   }, [currentNumber]);
 
   const handleSmash = useCallback(() => {
-    smashList.current.push(pokemonData);
+    setSmashList((curr) => [...curr, pokemonData]);
     setCurrentNumber((curr) => curr + 1);
-  }, [pokemonData]);
+  }, [pokemonData, setCurrentNumber, setSmashList]);
 
   const handlePass = useCallback(() => {
-    passList.current.push(pokemonData);
+    setPassList((curr) => [...curr, pokemonData]);
     setCurrentNumber((curr) => curr + 1);
-  }, [pokemonData]);
+  }, [pokemonData, setCurrentNumber, setPassList]);
 
   if (Object.keys(pokemonData).length === 0) return null;
 
@@ -45,7 +49,7 @@ export default function Main() {
         <div className='flex flex-col space-y-2 items-center'>
           <p className='text-2xl mb-8'>You disgust me</p>
           <div className='grid grid-cols-2 md:grid-cols-3 gap-2'>
-            {smashList.current.map((mon) => (
+            {smashList.map((mon) => (
               <PokemonDisplay pokemon={mon} variant='dense' />
             ))}
           </div>
